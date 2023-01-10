@@ -1,6 +1,6 @@
 # Kryptoanalyse-Modulorechnung
 
-Dieses Repository enthält einige Beispiele für Verschlüsselungalgorithmen, um die mathematischen Grundlagen zu verstehen. In der Datei "kryptoanalyse.py" sind einige Beispiele für die Verschlüsselungsalgorithmen, sowie deren Umkehrungen und einige Helper-Funktionen enthalten. Die Zwischenschritte werden größtenteils auf der Konsole ausgegeben.
+Dieses Repository enthält einige Beispiele für Verschlüsselungsalgorithmen, um die mathematischen Grundlagen zu verstehen. In der Datei "kryptoanalyse.py" sind einige Beispiele für die Verschlüsselungsalgorithmen, sowie deren Umkehrungen und einige Helper-Funktionen enthalten. Die Zwischenschritte werden größtenteils auf der Konsole ausgegeben.
 
 "caesar_decrypt_bruteforce.py" ist ein simples Skript, das einmal alle 26 möglichen Schlüssel des Caeser-Algorithmus durchprobiert und versucht, mit jedem einzelnen einen verschlüsselten Text zu entschlüsseln.
 
