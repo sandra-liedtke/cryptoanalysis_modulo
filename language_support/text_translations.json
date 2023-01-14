@@ -1,0 +1,402 @@
+{
+    "helper_01": {
+        "de": "Die Zahlen ",
+        "en": "The numbers "
+    },
+    "helper_02": {
+        "de": " und ",
+        "en": " and "
+    },
+    "helper_03": {
+        "de": " sind nicht teilerfremd",
+        "en": " are not mutually prime"
+    },
+    "fs_input_01": {
+        "de": "Eingabe Zufallszahl k = ",
+        "en": "Enter random number k = "
+    },
+    "fs_input_02": {
+        "de": "Eingabe öffentlicher Schlüssel n = ",
+        "en": "Enter public key n = "
+    },
+    "fs_input_03": {
+        "de": "Eingabe öffentlicher Schlüssel v = ",
+        "en": "Enter public key v = "
+    },
+    "fs_input_04": {
+        "de": "Eingabe privater Schlüssel s = ",
+        "en": "Enter private key s = "
+    },
+    "fs_input_05": {
+        "de": "Eingabe Zufallsbit b = ",
+        "en": "Enter random bit b = "
+    },
+    "fs_input_06": {
+        "de": "Errate Zufallsbit b = ",
+        "en": "Guess the random bit b = "
+    },
+    "fs_input_07": {
+        "de": "Eingabe öffentlicher Schlüssel n = ",
+        "en": "Enter public key n = "
+    },
+    "fs_input_08": {
+        "de": "Eingabe öffentlicher Schlüssel v = ",
+        "en": "Enter public key v = "
+    },
+    "fs_input_09": {
+        "de": "Wähle y = ",
+        "en": "Choose y = "
+    },
+    "fs_print_01": {
+        "de": "Bob sendet x mit Wert ",
+        "en": "Bob sends x with value "
+    },
+    "fs_print_02": {
+        "de": " an Alice",
+        "en": " to Alice"
+    },
+    "fs_print_03": {
+        "de": "Für Zufallsbit = 1 ist der Wert für y ",
+        "en": "For random bit = 1 the value of y is "
+    },
+    "fs_print_04": {
+        "de": "Verifikation: y² = x * v(invers) mod n -> y = ",
+        "en": "Verification: y² = x * y(invers) mod n -> y = "
+    },
+    "fs_print_05": {
+        "de": "Für Zufallsbit = 0 ist der Wert für y ",
+        "en": "For random bit = 0 the value of y is "
+    },
+    "fs_print_06": {
+        "de": "Verifikation: y² = x mod n -> y = ",
+        "en": "Verification: y² = x mod n -> y = "
+    },
+    "fs_print_07": {
+        "de": "Für Zufallsbit = 1 sende den Wert für x = ",
+        "en": "For random bit = 1 send value x = "
+    },
+    "fs_print_08": {
+        "de": "Für Zufallsbit = 0 sende den Wert für x = ",
+        "en": "For random bit = 0 send value x = "
+    },
+    "fs_print_09": {
+        "de": "Berechneter Schlüssel s: ",
+        "en": "Calculated key s: "
+    },
+    "rsa_input_01": {
+        "de": "Zahl für e: ",
+        "en": "Number for e: "
+    },
+    "rsa_input_02": {
+        "de": "Zahl für h: ",
+        "en": "Number for h: "
+    },
+    "rsa_input_03": {
+        "de": "Wähle Zufallszahl r = ",
+        "en": "Choose random number r = "
+    },
+    "rsa_print_01": {
+        "de": "Alice berechnet Wert y = ",
+        "en": "Alice calculates the value y = "
+    },
+    "rsa_print_02": {
+        "de": "Signiertes Dokument von Bob: ",
+        "en": "Signed Document from Bob: "
+    },
+    "rsa_print_03": {
+        "de": "Signierte Nachricht: ",
+        "en": "Signed message: "
+    },
+    "rsa_print_04": {
+        "de": "x1 Verschlüsselt (y1) ",
+        "en": "x1 encrypted (y1) "
+    },
+    "rsa_print_05": {
+        "de": "Inverses von y1 ",
+        "en": "Inverse of y1 "
+    },
+    "rsa_print_06": {
+        "de": "Mit Tarnung (y2): ",
+        "en": "With disguise (y2): "
+    },
+    "rsa_print_07": {
+        "de": "Zu y2 gehörender Klartext x2 ",
+        "en": "Clear text x2 belongibg to y2 "
+    },
+    "rsa_print_08": {
+        "de": "Zu Chosen-Ciphertext y3 gehörender Klartext: ",
+        "en": "Clear text belonging to chosen ciphertext y3: "
+    },
+    "rsa_print_09": {
+        "de": "Inverse von x1 ",
+        "en": "Inverse of x1 "
+    },
+    "rsa_print_10": {
+        "de": "Gültiges Signaturepaar (x, y) ",
+        "en": "Valid signature pair (x, y) "
+    },
+    "rsa_print_11": {
+        "de": "Verifikation für Signatur ",
+        "en": "Verification of signature "
+    },
+    "elgamal_input_01": {
+        "de": "Wähle Nachricht m = ",
+        "en": "Choose message m = "
+    },
+    "elgamal_input_02": {
+        "de": "Nachricht 2 (m2) = ",
+        "en": "Message 2 (m2) = "
+    },
+    "elgamal_input_03": {
+        "de": "Wähle Zufallszahl r = ",
+        "en": "Choose random number r = "
+    },
+    "elgamal_input_04": {
+        "de": "Wähle beliebige Nachricht m1 = ",
+        "en": "Choose any message m1 = "
+    },
+    "elgamal_print_01": {
+        "de": "Inverse von r: ",
+        "en": "Inverse of r: "
+    },
+    "elgamal_print_02": {
+        "de": "Nachrichtenbezeichner: ",
+        "en": "Message identifier: "
+    },
+    "elgamal_print_03": {
+        "de": "Signierte Nachricht von Alice (m, nb, s): ",
+        "en": "Signed message from Alice (m, nb, s): "
+    },
+    "elgamal_print_04": {
+        "de": "Verifikation (Bob): ",
+        "en": "Verification (Bob): "
+    },
+    "elgamal_print_05": {
+        "de": "Inverse zu b2: ",
+        "en": "Inverse of b2: "
+    },
+    "elgamal_print_06": {
+        "de": "Klartext m1: ",
+        "en": "Clear text m1: "
+    },
+    "elgamal_print_07": {
+        "de": "Verschlüsseltes m1 (modifiziert): ",
+        "en": "Encrypted m1 (modified): "
+    },
+    "elgamal_print_08": {
+        "de": "Entschlüsseltes m2: ",
+        "en": "Decrypted m2: "
+    },
+    "elgamal_print_09": {
+        "de": "Klartext zu Geheimtext (a, b): ",
+        "en": "Clear text for ciphertext (a, b): "
+    },
+    "elgamal_print_10": {
+        "de": "Zwischenwert x: ",
+        "en": "Interim value x: "
+    },
+    "elgamal_print_11": {
+        "de": "Sitzungsschlüssel K: ",
+        "en": "Session key K: "
+    },
+    "elgamal_print_12": {
+        "de": "Schlüsselwert: ",
+        "en": "Key value: "
+    },
+    "ec_input_01": {
+        "de": "a aus x³ + ax + b (gib 1 an, falls nicht vorhanden) ",
+        "en": "a from x³ + ax + b (enter 1 if not known)"
+    },
+    "ec_input_02": {
+        "de": "b aus x³ + ax + b (gib 0 an, falls nicht vorhanden) ",
+        "en": "b from x³ + ax + b (enter 0 if not known)"
+    },
+    "ec_print_01": {
+        "de": "Steigung m = ",
+        "en": "Slope m = "
+    },
+    "ec_print_02": {
+        "de": "Verifikation: ",
+        "en": "Verification: "
+    },
+    "ec_print_03": {
+        "de": "Einmalige Punktverdopplung Ak1: ",
+        "en": "Unique point duplication Ak1: "
+    },
+    "ec_print_04": {
+        "de": "Wiederhole bis a = 0 falls a eine gerade Zahl ist: a = a - 1 für jede Verdopplung -> Bsp: 4P = 2P + 2P -> 3 Verdopplungen",
+        "en": "Repeat until a = 0 if a is an even number: a = a - 1 for each duplication -> Bsp: 4P = 2P + 2P -> 3 duplications"
+    },
+    "ec_print_05": {
+        "de": "Wiederhole bis a = 0 falls a eine gerade Zahl ist: a = a-1 für jede Verdopplung -> Bsp: 5P = 2P + 2P + P -> 3 Verdopplungen und eine Addition",
+        "en": "Repeat until a = 0 if a is an even number: a = a - 1 for each duplication -> Bsp: 4P = 2P + 2P -> 3 duplications and 1 addition"
+    },
+    "ec_print_06": {
+        "de": "Wiederhole für b und erhalte Bk",
+        "en": "Repeat for b and get Bk"
+    },
+    "ec_print_07": {
+        "de": "Alice sendet dann Bk*a, Bob berechnet Ak*b",
+        "en": "Alice sends Bk * a, Bob calculates Ak * b"
+    },
+    "dsa_input_01": {
+        "de": "Wähle Zufallszahl r = ",
+        "en": "Choose random number r = "
+    },
+    "dsa_input_02": {
+        "de": "Hashwert von m = ",
+        "en": "Hash value of m = "
+    },
+    "dsa_input_03": {
+        "de": "Hashwert von m1 = ",
+        "en": "Hash value of m1 = "
+    },
+    "dsa_input_04": {
+        "de": "Hashwert von m2 = ",
+        "en": "Hashvalue of m2 = "
+    },
+    "dsa_input_05": {
+        "de": "x-Wert aus u1 * P + u2 * Q mod p = ",
+        "en": "x-value from u1 * p + u2 * Q mod p = "
+    },
+    "dsa_print_01": {
+        "de": "Nachrichtenbezeichner nb: ",
+        "en": "Message identifier nb: "
+    },
+    "dsa_print_02": {
+        "de": "Inverse von r: ",
+        "en": "Inverse of r: "
+    },
+    "dsa_print_03": {
+        "de": ", Signatur (m, s, nb): (",
+        "en": ", signature (m, s, nb): ("
+    },
+    "dsa_print_04": {
+        "de": "Verifikation: ",
+        "en": "Verification: "
+    },
+    "dsa_print_05": {
+        "de": "Zufallswert r berechnet: ",
+        "en": "Random value r calculated: "
+    },
+    "dsa_print_06": {
+        "de": "Errechneter privater Schlüssel d: ",
+        "en": "Calculated private key d: "
+    },
+    "pwhash_input_01": {
+        "de": "Zu hashendes Passwort: ",
+        "en": "Password to be hashed"
+    },
+    "pwhash_input_02": {
+        "de": "Zum Vergleich Passwort erneut eingeben: ",
+        "en": "Fore comparison: Enter password again: "
+    },
+    "pwhash_input_03": {
+        "de": "Passwort: ",
+        "en": "Password: "
+    },
+    "pwhash_print_01": {
+        "de": "Hash-Wert: ",
+        "en": "Hash value: "
+    },
+    "pwhash_print_02": {
+        "de": "Das Passwort ist korrekt",
+        "en": "The password is correct"
+    },
+    "pwhash_print_03": {
+        "de": "Die Passwörter stimmen nicht überein",
+        "en": "The passwords are not the same"
+    },
+    "pwhash_print_04": {
+        "de": " mit Salt: ",
+        "en": " with Salt: "
+    },
+    "pwhash_print_05": {
+        "de": "Gehashtes Passwort nach",
+        "en": "Hashed password after "
+    },
+    "pwhash_print_07": {
+        "de": " hat ",
+        "en": " has "
+    },
+    "pwhash_print_08": {
+        "de": "Bit Länge \n",
+        "en": "bits of length \n"
+    },
+    "pr_input_01": {
+        "de": "Modul n: ",
+        "en": "Module n: "
+    },
+    "pr_print_01": {
+        "de": "Zufallszahl x: ",
+        "en": "Random number x: "
+    },
+    "pr_print_02": {
+        "de": "Zufallszahl y: ",
+        "en": "Random number y: "
+    },
+    "pr_print_03": {
+        "de": "ggT(x - y, n)-> p: ",
+        "en": "gcD(x - y, n)-> p: "
+    },
+    "pr_print_04": {
+        "de": "Durchlauf: ",
+        "en": "Round: "
+    },
+    "fermat_print_01": {
+        "de": "Startwert x: ",
+        "en": "Start value x: "
+    },
+    "fermat_print_02": {
+        "de": "y zum Startwert x: ",
+        "en": "y for start value x: "
+    },
+    "fermat_print_03": {
+        "de": "Aktuelles x: ",
+        "en": "Current x: "
+    },
+    "fermat_print_04": {
+        "de": ", aktuelles y: ",
+        "en": ", current y: "
+    },
+    "fermat_print_05": {
+        "de": "y ist eine Quadratzahl? -> ",
+        "en": "Is y a square number? -> "
+    },
+    "fermat_print_06": {
+        "de": "Faktor 1 = ",
+        "en": "Factor 1 = "
+    },
+    "fermat_print_07": {
+        "de": "Faktor 2 = ",
+        "en": "Factor 2 = "
+    },
+    "nokey_print_01": {
+        "de": "Alice sendet y1 an Bob: ",
+        "en": "Alice sends y1 to Bob: "
+    },
+    "nokey_print_02": {
+        "de": "Bob sendet y2 an Alice: ",
+        "en": "Bob sends y2 to Alice: "
+    },
+    "nokey_print_03": {
+        "de": "Alice sendet y3 an Bob: ",
+        "en": "Alice sends y3 to Bob: "
+    },
+    "nokey_print_04": {
+        "de": "Von Bob errechnete Nachricht: ",
+        "en": "Message calculated by Bob: "
+    },
+    "caesar_input": {
+        "de": "Verschlüsselten Text eingeben: ",
+        "en": "Enter encrypted Text: "
+    },
+    "caesar_print_01": {
+        "de": "Für Schlüssel ",
+        "en": "For key "
+    },
+    "caesar_print_02": {
+        "de": " ist der entschlüsselte Text ",
+        "en": " the decrypted text is "
+    }
+}

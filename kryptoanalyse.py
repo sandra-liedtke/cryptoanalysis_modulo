@@ -1,13 +1,26 @@
 import hashlib
+import json
 import math
 from math import gcd
 import decimal
 import uuid
 
 
+##############################################################################################################################
+###### SETTINGS:
+# get text translations
+with open('language_support/text_translations.json', 'r') as translations:
+    CONFIG = json.load(translations)
+
+# define language to be used for input descriptions and print statements
+# per default German (de) and English (en) are available, but feel free to add more translations to the text_translations.json
+language_code = "de"
+
+
+##############################################################################################################################
 ###### HELPER:
-# größter gemeinsamer Teiler
-def ggT(p, q):
+# greatest common divisor
+def gcD(p, q):
     rest = 1
     while rest != 0: 
         if p >= q:
@@ -23,10 +36,10 @@ def ggT(p, q):
     return ggt
 
 
-# Multiple Inverse berechnen:
+# Multiple Inverse:
 def calc_multi_inverse(a, n):
     while math.gcd(a, n) > 1:
-         print("Die Zahlen ", a, " und ", n, " sind nicht teilerfremd")
+         print(CONFIG['helper_01'][language_code], a, CONFIG['helper_02'][language_code], n,CONFIG['helper_03'][language_code])
          b = 0
          return n, a, b
     b = 0
@@ -37,69 +50,69 @@ def calc_multi_inverse(a, n):
     return b
 
 
-# Berechne Anzahl möglicher Passwörter für eine bestimmte Passwortlänge
-# z: Anzahl der Zeichen im Alphabet, pw: Passwortlänge
-def anzahl_moeglicher_passwoerter(z, pw):
-    anzahl_pw = z**pw
-    print("Anzahl möglicher Passwörter: ", anzahl_pw)
+# Calculate number of possible passwords for a certain number of characters
+# z: number of characters in the alphabet, pw: password length
+def number_possible_passwords(z, pw):
+    number_passwords = z**pw
+    print(CONFIG['helper_04'][language_code], number_passwords)
 
 ##############################################################################################################################
 ###### CAESAR:
 # Caesar-Verschlüsselung
-def ceasar_encrypt(key, text):
-    verschluesselter_text = ''
+def trans_encrypt(key, text):
+    encrypted_text = ''
     key = key % 26
-    for zeichen in text:
-        zahl = ord(zeichen)
-        neue_zahl = zahl + key
-        if neue_zahl > ord('Z'):
-            neue_zahl = neue_zahl - 26
-        neuesZeichen = chr(neue_zahl)
-        verschluesselter_text = verschluesselter_text + neuesZeichen
-    print(verschluesselter_text)
+    for char in text:
+        number = ord(char)
+        new_number = number + key
+        if new_number > ord('Z'):
+            new_number = new_number - 26
+        new_char = chr(new_number)
+        encrypted_text = encrypted_text + new_char
+    print(encrypted_text)
 
 ##############################################################################################################################
 ###### FIAT-SHAMIR:
 # Fiat-Shamir
 def fiat_shamir():
-    k = int(decimal.Decimal(input("Eingabe Zufallszahl k = ")))
-    n = int(decimal.Decimal(input("Eingabe öffentlicher Schlüssel n = ")))
-    v = int(decimal.Decimal(input("Eingabe öffentlicher Schlüssel v = ")))
-    s = int(decimal.Decimal(input("Eingabe privater Schlüssel s = ")))
+    k = int(decimal.Decimal(input(CONFIG['fs_input_01'][language_code])))
+    n = int(decimal.Decimal(input(CONFIG['fs_input_02'][language_code])))
+    v = int(decimal.Decimal(input(CONFIG['fs_input_03'][language_code])))
+    s = int(decimal.Decimal(input(CONFIG['fs_input_04'][language_code])))
     x = k**2 % n
-    print("Bob sendet x mit Wert " , x, " an Alice ")
-    b = int(decimal.Decimal(input("Eingabe Zufallsbit b = ")))
+    print(CONFIG['fs_print_01'][language_code] , x, CONFIG['fs_print_02'][language_code])
+    b = int(decimal.Decimal(input(CONFIG['fs_input_05'][language_code])))
     y = 0
     if b == 1:
         y = k*s % n
-        print("Für Zufallsbit = 1 ist der Wert für y " , y)
-        print("Verifikation: y^2 = x * v(invers) mod n -> y = ", math.sqrt(x * calc_multi_inverse(v, n) % n))
+        print(CONFIG['fs_print_03'][language_code] , y)
+        print(CONFIG['fs_print_04'][language_code], math.sqrt(x * calc_multi_inverse(v, n) % n))
     else:
         y = k % n
-        print("Für Zufallsbit = 0 ist der Wert für y " , y)
-        print("Verifikation: y^2 = x mod n -> y = ", math.sqrt(x) % n)
+        print(CONFIG['fs_print_05'][language_code] , y)
+        print(CONFIG['fs_print_06'][language_code], math.sqrt(x) % n)
 
 
-# Angriff auf Fiat-Shamir
-def fiat_shamir_angriff():
-    b = int(decimal.Decimal(input("Errate Zufallsbit b = ")))
-    n = int(decimal.Decimal(input("Eingabe öffentlicher Schlüssel n = ")))
-    v = int(decimal.Decimal(input("Eingabe öffentlicher Schlüssel v = ")))
-    y = int(decimal.Decimal(input("Wähle y = ")))
+# Attack on Fiat-Shamir
+def fiat_shamir_attack():
+    b = int(decimal.Decimal(input(CONFIG['fs_input_06'][language_code])))
+    n = int(decimal.Decimal(input(CONFIG['fs_input_07'][language_code])))
+    v = int(decimal.Decimal(input(CONFIG['fs_input_08'][language_code])))
+    y = int(decimal.Decimal(input(CONFIG['fs_input_09'][language_code])))
     if b == 1:
         x = y**2 * v % 15
-        print("Für Zufallsbit = 1 sende den Wert für x " , x)
-        print("Verifikation: y^2 = x * v(invers) mod n -> y = ", math.sqrt(x * calc_multi_inverse(v, n) % n))
+        print(CONFIG['fs_print_07'][language_code], x)
+        print(CONFIG['fs_print_04'][language_code], math.sqrt(x * calc_multi_inverse(v, n) % n))
     else:
         x = y**2
-        print("Für Zufallsbit = 0 sende den Wert für x " , x)
-        print("Verifikation: y^2 = x mod n -> y = ", math.sqrt(x) % n)
+        print(CONFIG['fs_print_08'][language_code] , x)
+        print(CONFIG['fs_print_06'][language_code], math.sqrt(x) % n)
 
 
-# Angriff bei gleicher Zufallszahl k für 2 verschiedene Geheimtexte
-def fiat_shamir_angriff_zufall(y1, y2, n):
+# Attack for same random number k on two different encrypted texts
+def fiat_shamir_random(y1, y2, n):
     s = (y2 * calc_multi_inverse(y1, n)) % n
-    print("Berechneter Schlüssel s: ", s)
+    print(CONFIG['fs_print_09'][language_code], s)
     
 ##############################################################################################################################
 ###### RSA:
@@ -113,32 +126,32 @@ def rsa_decrypt(n, d, y):
     return x
 
 
-# Schlüsselberechnung
+# calculate keys
 def rsa_key(p, q):
     n = p * q
     phi_n = (p - 1) * (q - 1)
-    e = int(input("Zahl für e: "))
+    e = int(input(CONFIG['rsa_input_01'][language_code]))
     while math.gcd(e, phi_n) > 1:
         e += 1
     d = 0
-    h = int(input("Zahl für h: "))
+    h = int(input(CONFIG['rsa_input_02'][language_code]))
     while h != 1:
         d += 1
         h = e * d % phi_n
     return n, e, d, phi_n
 
 
-# Privaten Schlüssel berechnen	 
+# calc private key 
 def rsa_privatekey(e, phi_n):
     d = 0
-    h = int(input("Zahl für h: "))
+    h = int(input(CONFIG['rsa_input_02'][language_code]))
     while h != 1:
         d += 1
         h = e * d % phi_n
     return d
      
 
-# Wird gebraucht um aus dem Public Key den privaten Schlüssel zu berechnen
+# Will be needed to calculate private key from public key
 def rsa_phi_n(n):
     amount = 0        
     for k in range(1, n + 1):
@@ -147,60 +160,61 @@ def rsa_phi_n(n):
     return amount
 
 
-# Signatur
+# signature
 def rsa_signature(x, d, n):
     s = x**d % n
     return s
 
 
-# Verifizierung
+# verification
 def rsa_verifysignature(n, e, s):
      x = s**e % n
      return x
 
 
-# Blinde Signatur
+# blind signature
 def rsa_blind_signature(x, e, n, d):
-    r = int(decimal.Decimal(input("Wähle Zufallszahl r = ")))
+    r = int(decimal.Decimal(input(CONFIG['rsa_input_03'][language_code])))
     y = x * r**e % n
-    print("Alice berechnet Wert y=" , y)
-    y_signiert = y**d % n
-    print("Signiertes Dokument von Bob: " , y_signiert)
-    r_invers = calc_multi_inverse(r, n)
-    nachricht_signiert = y_signiert * r_invers % n
-    print("Signierte Nachricht: " , nachricht_signiert)
+    print(CONFIG['rsa_print_01'][language_code] , y)
+    y_signed = y**d % n
+    print(CONFIG['rsa_print_02'][language_code]  , y_signed)
+    r_inverse = calc_multi_inverse(r, n)
+    msg_signed = y_signed * r_inverse % n
+    print(CONFIG['rsa_print_03'][language_code]  , msg_signed)
 
-# Chosen-Ciphertext-Angriff auf RSA-Verschlüsselung
+
+# Chosen-Ciphertext-Attack on RSA-Encryption
 def rsa_chosen_ciphertext(n, e, d, y3, x1):
     y1 = x1**e % n
-    print("x1 Verschlüsselt (y1) " , y1)
-    y_invers = calc_multi_inverse(y1, n) % n
-    print("Inverses von y1" , y_invers)
-    y2 = y3 * y_invers % n
-    print("Mit Tarnung (y2): " , y2)
+    print(CONFIG['rsa_print_04'][language_code] , y1)
+    y_inverse = calc_multi_inverse(y1, n) % n
+    print(CONFIG['rsa_print_05'][language_code] , y_inverse)
+    y2 = y3 * y_inverse % n
+    print(CONFIG['rsa_print_06'][language_code] , y2)
     x2 = rsa_decrypt(n, d, y2)
-    print("Zu y2 gehörender Klartext x2 " , x2)
+    print(CONFIG['rsa_print_07'][language_code] , x2)
     x3 = x1 * x2
-    print("Zu Chosen-Ciphertext y3 gehörender Klartext: " , x3)
+    print(CONFIG['rsa_print_08'][language_code] , x3)
 
 
-# Angriff auf RSA-Signatur
-def rsa_angriff_auf_signature(x1, x3, n, d):
-    x1_invers = calc_multi_inverse(x1, n)
-    print("Inverse von x1 " , x1_invers)
-    x2 = x3 * x1_invers % n
+# Attack on RSA-Signature
+def rsa_attack_signature(x1, x3, n, d):
+    x1_inverse = calc_multi_inverse(x1, n)
+    print(CONFIG['rsa_print_09'][language_code] , x1_inverse)
+    x2 = x3 * x1_inverse % n
     print("x2: " , x2)
     s1 = x1**d % n
-    s2 = (x3 * x1_invers)**d % n
+    s2 = (x3 * x1_inverse)**d % n
     print("s1: " , s1 , ", s2: ", s2)
     s3 = s1 * s2 % n
-    print("Gültiges Signaturepaar (x, y) " , x3, ", ", s3)
+    print(CONFIG['rsa_print_10'][language_code] , x3, ", ", s3)
     s_verify = x3**d % n
-    print("Verifikation für Signatur ", s3, ": " , s_verify)
+    print(CONFIG['rsa_print_11'][language_code], s3, ": " , s_verify)
 
 ##############################################################################################################################
 ###### ELGAMAL:
-# Berechne e aus K(p, g, e)
+# calculate e from K(p, g, e)
 def key_elgamal(g, d, p):
     e = g**d % p
     return e
@@ -214,59 +228,59 @@ def elgamal_encrypt(p, g, e, k, x):
 
 def elgamal_decrypt(p, d, a, b):
     h = a**d % p
-    invers = 0
+    inverse = 0
     h1 = 2
     while h1 != 1:
-        invers = invers + 1
-        h1 = h * invers % p
-    y = b * invers % p
+        inverse = inverse + 1
+        h1 = h * inverse % p
+    y = b * inverse % p
     return y
 
 
-# ElGamal Signatur
+# ElGamal Signature
 def elgamal_signature(r, p, g, d):
-    p_neu = p - 1
-    r_invers = calc_multi_inverse(r, p_neu)
-    print("Inverse von r: ", r_invers)
+    p_new = p - 1
+    r_inverse = calc_multi_inverse(r, p_new)
+    print(CONFIG['elgamal_print_01'][language_code], r_inverse)
     nb = g**r % p
-    print("Nachrichtenbezeichner: ", nb)
-    m = int(decimal.Decimal(input("Wähle Nachricht m = ")))
-    s = (m - (d * nb))* r_invers % p_neu
-    print("Signierte Nachricht von Alice (m, nb, s): ", m,", ", nb,", ", s)
+    print(CONFIG['elgamal_print_02'][language_code], nb)
+    m = int(decimal.Decimal(input(CONFIG['elgamal_input_01'][language_code])))
+    s = (m - (d * nb))* r_inverse % p_new
+    print(CONFIG['elgamal_print_03'][language_code], m,", ", nb,", ", s)
     
 
-# Verifizierung
+# Verfication
 def elgamal_verify_signature(p, g, e, d, s, nb, r):
-    print("Verifikation (Bob): ")
+    print(CONFIG['elgamal_print_04'][language_code])
     m = (d * nb + r * s) % p
     gm = g**m % p
     enb = e**nb * nb**s % p
     print("g**m = e**nb * nb**s mod p: ", gm, " = ", enb, "?" )
     
 
-# Known-Plaintext-Angriff auf ElGamal
+# Known-Plaintext-Attack on ElGamal
 def elgamal_known_plain(p, b1, b2):
-    m2 = int(decimal.Decimal(input("Nachricht 2 (m2) = ")))
+    m2 = int(decimal.Decimal(input(CONFIG['elgamal_input_02'][language_code])))
     m1 = (b1 * calc_multi_inverse(b2, p) * m2) % p
-    print("Inverse zu b2: ", calc_multi_inverse(b2, p))
-    print("Klartext m1: ", m1)
+    print(CONFIG['elgamal_print_05'][language_code], calc_multi_inverse(b2, p))
+    print(CONFIG['elgamal_print_06'][language_code], m1)
 
 
-# Chosen-Ciphertext-Angriff auf ElGamal
+# Chosen-Ciphertext-Attack on ElGamal
 def elgamal_chosen_cipher(p, g, e, d, a, b):
-    r = int(decimal.Decimal(input("Wähle Zufallszahl r = ")))
-    m1 = int(decimal.Decimal(input("Wähle beliebige Nachricht m1 = ")))
+    r = int(decimal.Decimal(input(CONFIG['elgamal_input_03'][language_code])))
+    m1 = int(decimal.Decimal(input(CONFIG['elgamal_input_04'][language_code])))
     a_mod = (g**r * a) % p
     b_mod = (e**r * m1 * b) % p
-    print("Verschlüsseltes m1 (modifiziert): ", a_mod, ", ", b_mod)
+    print(CONFIG['elgamal_print_07'][language_code], a_mod, ", ", b_mod)
     m2 = elgamal_decrypt(p, g, d, a_mod, b_mod)
-    print("Entschlüsseltes m2: ", m2)
+    print(CONFIG['elgamal_print_08'][language_code], m2)
     m = (m2 * calc_multi_inverse(m1, p)) % p
-    print("Klartext zu Geheimtext (a, b): ", m)
+    print(CONFIG['elgamal_print_09'][language_code], m)
 
 
-# Zufallszahl k in ElGamal berechnen
-def elgamal_zufall(p, g, a):
+# calculate random number k
+def elgamal_random(p, g, a):
     k = 0
     h = 0
     while h != a:
@@ -278,26 +292,26 @@ def elgamal_zufall(p, g, a):
 # Schlüssel berechnen
 def elgamal_key_decrypt(p, g, e, k, d):
         x = g**d % p
-        print("Zwischenwert x: ", x)
+        print(CONFIG['elgamal_print_10'][language_code], x)
         y = e**k % p
-        print("Sitzungsschlüssel K: ", y)
+        print(CONFIG['elgamal_print_11'][language_code], y)
         a = g**k % p
-        print("Schlüsselwert: ", a)
+        print(CONFIG['elgamal_print_12'][language_code], a)
 	
 ##############################################################################################################################
 ###### ELLIPTIC CURVES:
-# Unendlicher Zahlenkörper
-def punkt_addition_unendlich(xp, yp, xq, yq):
+# infinite number field
+def point_addition_infinite(xp, yp, xq, yq):
     m = (yp - yq)/(xp - xq)
-    print("Steigung m= ", m)
+    print(CONFIG['ec_print_01'][language_code], m)
     xr = m**2 - xp - xq
     yr = yp * (-1) + m * (xp - xr)
     print("R(x, y) = (", xr, ", ", yr, ")")
 
 
-def punkt_verdopplung_unendlich(xp, yp):
+def point_duplication_infinite(xp, yp):
     m = (3 * xp**2) / (2 * yp)
-    print("Steigung m: ", m)
+    print(CONFIG['ec_print_01'][language_code], m)
     b = yp - m*xp
     print("b = ", b)
     xr = m**2 - 2 * xp
@@ -305,20 +319,20 @@ def punkt_verdopplung_unendlich(xp, yp):
     print("R(x, y) = (", xr, ", ", yr, ")")
 
 
-# Endlicher Zahlenkörper
-def punkt_addition_endlich(xp, yp, xq, yq, p):
+# finite number field
+def point_addition_finite(xp, yp, xq, yq, p):
      m = ((yp - yq)/(xp - xq)) % p
-     print("Steigung m= ", m)
+     print(CONFIG['ec_print_01'][language_code], m)
      xr = (m**2 - xp - xq) % p
      yr = (yp * (-1) + m * (xp - xr)) % p
      print("R(x, y) = (", xr, ", ", yr, ")")
 
 
-def punkt_verdopplung_endlich(xp, yp, p):
+def point_duplication_finite(xp, yp, p):
     m1 = ((3 * xp**2) + 1) % p
     m2 = (2 * yp) % p
     m = (m1 * calc_multi_inverse(m2, p)) % p
-    print("Steigung m: ", m)
+    print(CONFIG['ec_print_01'][language_code], m)
     xr = (m**2 - 2 * xp) % p
     yr = (yp * (-1) + m * (xp - xr)) % p
     print("R(x, y) = (", xr, ", ", yr, ")")
@@ -327,36 +341,36 @@ def punkt_verdopplung_endlich(xp, yp, p):
     return xr, yr
 
 
-# Verifizierung
+# Verification
 def ec_verify(yr, xr, p):
-    a = int(decimal.Decimal(input("a aus x^3 + ax + b (gib 1 an, falls nicht vorhanden) ")))
-    b = int(decimal.Decimal(input("b aus x^3 + ax + b (gib 0 an, falls nicht vorhanden) ")))
+    a = int(decimal.Decimal(input(CONFIG['ec_input_01'][language_code])))
+    b = int(decimal.Decimal(input(CONFIG['ec_input_02'][language_code])))
     print("================================")
     t1 = yr**2 % p
     t2 = (xr**3 + a * xr + b) % p
-    print("Verifikation: ", t1, " = ", t2, "?")
+    print(CONFIG['ec_print_02'][language_code], t1, " = ", t2, "?")
 
 
 # Diffie-Hellman
 def ec_diffie_hellman(xp, yp, p):
-    Ak1 = punkt_verdopplung_endlich(xp, yp, p)
-    print("Einmalige Punktverdopplung Ak1: ", Ak1)
-    print("Wiederhole bis a = 0 falls a eine gerade Zahl ist: a = a-1 für jede Verdopplung -> Bsp: 4P = 2P + 2P -> 3 Verdopplungen")
-    print("Wiederhole bis a = 0 falls a eine gerade Zahl ist: a = a-1 für jede Verdopplung -> Bsp: 5P = 2P + 2P + P -> 3 Verdopplungen und eine Addition")
-    print("Wiederhole für b und erhalte Bk")
-    print("Alice sendet dann Bk*a, Bob berechnet Ak*b")
+    Ak1 = point_duplication_finite(xp, yp, p)
+    print(CONFIG['ec_print_03'][language_code], Ak1)
+    print(CONFIG['ec_print_04'][language_code])
+    print(CONFIG['ec_print_05'][language_code])
+    print(CONFIG['ec_print_06'][language_code])
+    print(CONFIG['ec_print_07'][language_code])
 
 ##############################################################################################################################
 ###### DIGITAL SIGNATURE ALGORITHM:
 def dsa_signature(p, g, d, m):
-    r = int(decimal.Decimal(input("Wähle Zufallszahl r = ")))
-    hm = int(decimal.Decimal(input("Hashwert von m = ")))
+    r = int(decimal.Decimal(input(CONFIG['dsa_input_01'][language_code])))
+    hm = int(decimal.Decimal(input(CONFIG['dsa_input_02'][language_code])))
     nb = g**r % p
-    print("Nachrichtenbezeichner nb: ", nb)
+    print(input(CONFIG['dsa_print_01'][language_code], nb))
     r_invers = calc_multi_inverse(r, (p - 1))
-    print("Inverse von r: ", r_invers)
+    print(CONFIG['dsa_print_02'][language_code], r_invers)
     s = r_invers * (hm + d * nb) % (p - 1)
-    print("s: ", s, ", Signatur (m, s, nb): (", m, ", ", s, ", ", nb, ")")
+    print("s: ", s, CONFIG['dsa_print_03'][language_code], m, ", ", s, ", ", nb, ")")
     
 
 def dsa_verify_signature(hm, s, p, g, e, nb):
@@ -365,54 +379,54 @@ def dsa_verify_signature(hm, s, p, g, e, nb):
     u2 = (w * nb) % (p - 1)
     print("w: ", w, ", u1: ", u1, ", u2: ", u2)
     s_verify = ((g**u1) * (e**u2)) % p
-    print("Verifikation: ", nb, " = ", s_verify, "?")
+    print(CONFIG['dsa_print_04'][language_code], nb, " = ", s_verify, "?")
 
 
 def dsa_angriff(s1, s2, p, nb):
-    hm1 = int(decimal.Decimal(input("Hashwert von m1 = ")))
-    hm2 = int(decimal.Decimal(input("Hashwert von m2 = ")))
+    hm1 = int(decimal.Decimal(input(CONFIG['dsa_input_03'][language_code])))
+    hm2 = int(decimal.Decimal(input(CONFIG['dsa_input_04'][language_code])))
     r = ((hm1 - hm2) / (s1 - s2 )) % (p - 1)
-    print("Zufallswert r berechnet: ", r)
+    print(CONFIG['dsa_print_05'][language_code], r)
     d = ((s1 * r - hm1 ) * calc_multi_inverse(nb, (p - 1))) % (p - 1)
-    print("Errechneter privater Schlüssel d: ", d)
+    print(CONFIG['dsa_print_06'][language_code], d)
     
 # Elliptic Curve Digital Signature Algorithm
 def ec_dsa(x, p, r, d, m):
     nb = x % p
-    print("Nachrichtenbezeichner nb: ", nb)
-    hm1 = int(decimal.Decimal(input("Hashwert von m1 = ")))
-    r_invers = calc_multi_inverse(r, p)
-    print("Inverse von r: ", r_invers)
-    s = (r_invers * (hm1 + d * nb)) % p
-    print("Signatur (m, s, nb): (", m, ", ", s, ", ", nb, ")")
+    print(CONFIG['dsa_print_01'][language_code], nb)
+    hm1 = int(decimal.Decimal(input(CONFIG['dsa_input_03'][language_code])))
+    r_inverse = calc_multi_inverse(r, p)
+    print(CONFIG['dsa_print_02'][language_code], r_inverse)
+    s = (r_inverse * (hm1 + d * nb)) % p
+    print(str(CONFIG['dsa_print_03'][language_code]).strip(', '), m, ", ", s, ", ", nb, ")")
     
     
-def ec_dsa_verifikation(hm, s, p, nb):
+def ec_dsa_verification(hm, s, p, nb):
     w = calc_multi_inverse(s, p) % (p - 1)
     u1 = (w * hm) % p
     u2 = (w * nb) % p
     print("w: ", w, ", u1: ", u1, ", u2: ", u2)
-    x = int(decimal.Decimal(input("x-Wert aus u1 * P + u2 * Q mod p = ")))
+    x = int(decimal.Decimal(input(CONFIG['dsa_input_05'][language_code])))
     t = x % p
-    print("Verifikation: ", t, " = ", nb, "?")
+    print(CONFIG['dsa_print_04'][language_code], t, " = ", nb, "?")
 
 ##############################################################################################################################
 ###### PASSWORD HASHING:
 def hash_only_password():
-    passwort = input("Zu hashendes Passwort: ")
-    hashed_passwort = hashlib.sha512( passwort.encode()).hexdigest()
-    print('Hash-Wert: ' , hashed_passwort)
+    password = input(CONFIG['pwhash_input_01'][language_code])
+    hashed_password = hashlib.sha512(password.encode()).hexdigest()
+    print(CONFIG['pwhash_print_01'][language_code], hashed_password)
     print("================================")
     i = 1
     while i <= 3 :   
-       vergleich_passwort = input("Zum Vergleich Passwort erneut eingeben: ")
+       compare_pw = input(CONFIG['pwhash_input_02'][language_code])
        i += 1
-       if passwort == vergleich_passwort:
-           print("Das Passwort war korrekt!")
+       if password == compare_pw:
+           print(CONFIG['pwhash_print_02'][language_code])
            print("================================")
            break
        else:
-           print("Die Passwörter stimmen nicht überein")
+           print(CONFIG['pwhash_print_03'][language_code])
      
 
 def hash(password):
@@ -421,66 +435,66 @@ def hash(password):
 
 
 def hash_password_salted():
-    passwort = input("Zu hashendes Passwort:  ")
-    hashed_passwort , salt = hash(passwort)
-    print('Hash-Wert: ' , hashed_passwort , "mit Salt: " , salt)
+    password = input(CONFIG['pwhash_input_01'][language_code])
+    hashed_password , salt = hash(password)
+    print(CONFIG['pwhash_print_01'][language_code] , hashed_password ,CONFIG['pwhash_print_04'][language_code] , salt)
     print("================================")
     i = 1
     while i <= 3 :   
-       vergleich_passwort = input("Zum Vergleich Passwort erneut eingeben: ")
+       compare_pw = input(CONFIG['pwhash_input_01'][language_code])
        i += 1
-       if passwort == vergleich_passwort:
-           print("Das Passwort war korrekt!")
+       if password == compare_pw:
+           print(CONFIG['pwhash_print_02'][language_code])
            print("================================")
            break
        else:
-           print("Die Passwörter stimmen nicht überein")
+           print(CONFIG['pwhash_print_03'][language_code])
 
 
 def sha_pwd_hash():
-   passwort = input("Passwort: ")
+   password = input(CONFIG['pwhash_input_03'][language_code])
    print("================================")
    x=['md5','sha1','sha256', 'sha384', 'sha512']
    for x in x:
       hash = hashlib.new(x)
-      hash.update(passwort.encode())
-      print("Gehashtes Passwort nach" , x, "  ", hash.hexdigest())
-      print("Gehashtes Passwort nach" , x," hat ", hash.digest_size * 8 , "Bit Länge \n")
+      hash.update(password.encode())
+      print(CONFIG['pwhash_print_05'][language_code], x, "  ", hash.hexdigest())
+      print(CONFIG['pwhash_print_05'][language_code], x, CONFIG['pwhash_print_07'][language_code], hash.digest_size * 8 , CONFIG['pwhash_print_08'][language_code])
 
 ##############################################################################################################################
 ###### POLLARD-RHO:
 def pollard_rho () :
-   n=int(decimal.Decimal(input("Modul n: "))) 
+   n=int(decimal.Decimal(input(CONFIG['pr_input_01'][language_code]))) 
    count = 0
    x = 2
    y = 2
    d = 1
    while d<=1:
        x = ( x * x + 23) % n
-       print("Zufallszahl x: ", x)
+       print(CONFIG['pr_print_01'][language_code], x)
        y = ( y * y + 23) % n
        y = ( y * y + 23) % n
-       print("Zufallszahl y: ", y)
+       print(CONFIG['pr_print_02'][language_code], y)
        print("x - y: ", x - y)
        d = math.gcd (x - y, n)    
        count += 1
-       print("ggT(x - y, n)-> p: ", d)
-       print("Durchlauf: ", count)
+       print(CONFIG['pr_print_03'][language_code], d)
+       print(CONFIG['pr_print_04'][language_code], count)
        print("================================")
 
 ##############################################################################################################################
 ###### FERMAT:
 def factorize_fermat(n):
    x = math.ceil(math.sqrt(n))
-   print("Startwert x: ", x)
+   print(CONFIG['fermat_print_01'][language_code], x)
    print ("================================")
    y = x**2 - n
-   print("y zum Startwert x: ", y)
+   print(CONFIG['fermat_print_02'][language_code], y)
    while not math.sqrt(y).is_integer():
       x += 1
       y = x**2 - n
-      print("Aktuelles x: ", x, ", aktuelles y: ", y)
-      print("y ist eine Quadratzahl? -> ", math.sqrt(y))
+      print(CONFIG['fermat_print_03'][language_code], x, CONFIG['fermat_print_04'][language_code], y)
+      print(CONFIG['fermat_print_05'][language_code], math.sqrt(y))
    print("x + sqrt(y) ", x + math.sqrt(y), ", x - math.sqrt(y): ", x - math.sqrt(y))
      
 	
@@ -489,23 +503,23 @@ def trial_factorization(n):
    while p <= math.sqrt(n) :
          if n % p == 0:
             n //= p
-            print ("Faktor 1 = ", n)
+            print (CONFIG['fermat_print_06'][language_code], n)
             return (p)
          else:
             p +=1
-   n = int(decimal.Decimal(input("Modul: ")))
+   n = int(decimal.Decimal(input(CONFIG['pr_input_01'][language_code])))
    print ("================================")
-   print ("Faktor 2 = ", p)
+   print (CONFIG['fermat_print_07'][language_code], p)
 
 ##############################################################################################################################
-###### ANDERE:
+###### OTHER:
 # Shamir's No-Key-Protokoll
 def shamir_no_key(p, a, b, x):
     y1 = (x**a) % p
-    print("Alice sendet y1 an Bob: ", y1)
+    print(CONFIG['nokey_print_01'][language_code], y1)
     y2 = (y1**b) % p
-    print("Bob sendet y2 an Alice: ", y2)
+    print(CONFIG['nokey_print_02'][language_code], y2)
     y3 = (y2**calc_multi_inverse(a, (p - 1))) % p
-    print("Alice sendet y3 an Bob: ", y3)
+    print(CONFIG['nokey_print_03'][language_code], y3)
     k = (y3**calc_multi_inverse(b, (p - 1))) % p
-    print("Von Bob errechnete Nachricht: ", k)
+    print(CONFIG['nokey_print_04'][language_code], k)
