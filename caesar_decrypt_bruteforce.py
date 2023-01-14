@@ -18,7 +18,7 @@ def caesar_bruteforce():
     while key < 25:
         clear = ""
         for char in encrypted_text.upper():
-            if not char in [" ", ",", ".", "!","?", "(", ")", "Ä", "Ö", "Ü"]:
+            if not char in [" ", ",", ".", "!", "?", "(", ")", "Ä", "Ö", "Ü", ";", ":", "-", "+", "*"]:
                 current = str(dict[char])
                 clear += (list(dict.keys()))[(int(current) - key) % 26]
             else:
