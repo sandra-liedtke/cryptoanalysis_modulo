@@ -19,9 +19,12 @@ def caesar_bruteforce():
     key = 0
     for key in range(0, 25):
         clear = ""
-        for char in encrypted_text.upper().replace(' ', ''):
-            current = str(dict[char])
-            clear += (list(keys))[(int(current) - key) % 26]
+        for char in encrypted_text.upper():
+            if not char in [" ", ",", ".", "!","?", "(", ")", "Ä", "Ö", "Ü"]:
+                current = str(dict[char])
+                clear += (list(keys))[(int(current) - key) % 26]
+            else:
+                clear += char
         print(CONFIG['caesar_print_01'][language_code], key, CONFIG['caesar_print_02'][language_code], clear)
     
 
