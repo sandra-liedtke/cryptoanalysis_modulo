@@ -23,6 +23,7 @@ def caesar_bruteforce():
                 clear += (list(dict.keys()))[(int(current) - key) % 26]
             else:
                 clear += char
+        key += 1
         print(CONFIG['caesar_print_01'][language_code], key, CONFIG['caesar_print_02'][language_code], clear)
     
 
