@@ -15,7 +15,7 @@ def caesar_bruteforce():
         }
     # loop through all possible keys 0-25 (alphabeth without Umlaute)
     key = 0
-    while key < 25:
+    while key < 26:
         clear = ""
         for char in encrypted_text.upper():
             if not char in [" ", ",", ".", "!", "?", "(", ")", "Ä", "Ö", "Ü", ";", ":", "-", "+", "*"]:
