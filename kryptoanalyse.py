@@ -1,7 +1,6 @@
 import hashlib
 import json
 import math
-from math import gcd
 import decimal
 import uuid
 
@@ -15,7 +14,6 @@ with open('language_support/text_translations.json', 'r') as translations:
 # define language to be used for input descriptions and print statements
 # per default German (de) and English (en) are available, but feel free to add more translations to the text_translations.json
 language_code = "de"
-
 
 ##############################################################################################################################
 ###### HELPER:
@@ -57,8 +55,7 @@ def number_possible_passwords(z, pw):
     print(CONFIG['helper_04'][language_code], number_passwords)
 
 ##############################################################################################################################
-###### CAESAR:
-# Caesar-Verschlüsselung
+###### TRANSPOSITION:
 def trans_encrypt(key, text):
     encrypted_text = ''
     key = key % 26
@@ -155,7 +152,7 @@ def rsa_privatekey(e, phi_n):
 def rsa_phi_n(n):
     amount = 0        
     for k in range(1, n + 1):
-        if gcd(n, k) == 1:
+        if math.gcd(n, k) == 1:
             amount += 1
     return amount
 
@@ -289,7 +286,7 @@ def elgamal_random(p, g, a):
     return k
 
 
-# Schlüssel berechnen
+# calculate key
 def elgamal_key_decrypt(p, g, e, k, d):
         x = g**d % p
         print(CONFIG['elgamal_print_10'][language_code], x)
