@@ -1,6 +1,6 @@
 # Cryptoanalysis / Modulo Calculations
 
-*- English Version Below-*
+*- English Version Below -*
 
 Dieses Repository enthält einige Beispiele für Verschlüsselungsalgorithmen, um die mathematischen Grundlagen zu verstehen. In der Datei "kryptoanalyse.py" sind einige Beispiele für die Verschlüsselungsalgorithmen, sowie deren Umkehrungen und einige Helper-Funktionen enthalten. Die Zwischenschritte werden größtenteils auf der Konsole ausgegeben.
 
