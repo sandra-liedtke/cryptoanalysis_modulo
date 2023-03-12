@@ -121,7 +121,7 @@
     },
     "rsa_print_07": {
         "de": "Zu y2 gehörender Klartext x2 ",
-        "en": "Clear text x2 belongibg to y2 "
+        "en": "Clear text x2 belonging to y2 "
     },
     "rsa_print_08": {
         "de": "Zu Chosen-Ciphertext y3 gehörender Klartext: ",

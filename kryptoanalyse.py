@@ -379,7 +379,7 @@ def dsa_verify_signature(hm, s, p, g, e, nb):
     print(CONFIG['dsa_print_04'][language_code], nb, " = ", s_verify, "?")
 
 
-def dsa_angriff(s1, s2, p, nb):
+def dsa_attack(s1, s2, p, nb):
     hm1 = int(decimal.Decimal(input(CONFIG['dsa_input_03'][language_code])))
     hm2 = int(decimal.Decimal(input(CONFIG['dsa_input_04'][language_code])))
     r = ((hm1 - hm2) / (s1 - s2 )) % (p - 1)
